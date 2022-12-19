@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+}
+h1,
+h2,
+h3,
+p,
+a,
+span,
+button,
+input,
+label {
+    margin: 0;
+    font-family: sans-serif;
+    color: #1C1C1C;
+    text-align: center;
+}
+/*========================================================================
+  Header
+/*=======================================================================*/
+.header {
+    background: #d0d0d0;
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: center; 
+}
+.header h1 {
+    font-size: 40px;
+    text-align: center;
+    margin: 0 auto; 
+}
+.header .logoutBox {
+    position: relative; 
+}
+.logoutBox button {
+    position: absolute;
+    right: 15px;
+    top: -40px;
+    padding: 10px;
+    background: #f44336;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+.header .switchBox {
+    position: relative;
+}
+.switchBox button {
+    position: absolute;
+    left: 15px;
+    top: 4px;
+    padding: 10px;
+    background: #f44336;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer; 
+}
+/*========================================================================
+  Register
+/*=======================================================================*/
+.content {
+    max-width: 1080px;
+    margin: 10px auto;
+}
+.RegisterForm {
+    width: 100%;
+    text-align: center;
+}
+.RegisterForm input {
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+.RegisterForm button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 9px;
+    color: #fff;
+    background-color: #4cc120;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.RegisterForm input::placeholder {
+    color: #000;
+}
+.register {
+    text-decoration: underline;
+    font-style: italic;
+    margin: 7px 0px 12px 0px;
+    cursor: pointer;
+}
+/*========================================================================
+  Index
+/*=======================================================================*/
+.createButton a {
+    padding: 10px;
+    background: #f44336;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}

@@ -11,6 +11,7 @@ include("classes/UUID.class.php");
       // Connect to the database
       $db = database::connect();
 
+      echo '<h2 class="pageTitle"> Taak aanmaken </h2>';
       echo '<div class="createButton">';
       echo '<a href="task.php">Taak aanmaken</a>';
       echo '</div>';
