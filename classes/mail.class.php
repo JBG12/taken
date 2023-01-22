@@ -28,11 +28,11 @@ class mail {
         $mail->Body         .= '</body></html>';
 
         // Send email
-        // if ($mail->send()) {
-        //     // Mail is sent
-        // } else {
-        //     echo 'Er is een fout opgetreden, probeer het later opnieuw.';
-        // }
+        if ($mail->send()) {
+            // Mail is sent
+        } else {
+            echo 'Er is een fout opgetreden, probeer het later opnieuw.';
+        }
     }
 }
 ?>

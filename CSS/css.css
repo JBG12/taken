@@ -9,11 +9,42 @@ a,
 span,
 button,
 input,
-label {
+label,
+li {
     margin: 0;
     font-family: sans-serif;
     color: #1C1C1C;
     text-align: center;
+    word-wrap: break-word;
+}
+a {
+    text-decoration: none;
+    align-self: center;
+}
+label {
+    font-size: 20px;
+}
+.error {
+    color: #fff;
+    background: #db3327;
+    width: max-content;
+    margin: 10px auto;
+    padding: 10px 10px;
+    font-size: 18px;
+    border-radius: 6px;
+    max-width: 30%;
+}
+.backButton {
+    width: min-content;
+    position: absolute;
+}
+.fas.fa-arrow-left {
+    background: #666;
+    color: #fff;
+    padding: 7px 10px;
+    font-size: 28px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 /*========================================================================
   Header
@@ -24,10 +55,35 @@ label {
     margin-bottom: 15px;
     text-align: center; 
 }
-.header h1 {
-    font-size: 40px;
+.header a {
+    font-size: 50px;
     text-align: center;
-    margin: 0 auto; 
+    margin: 0 auto;
+    text-decoration: navajowhite;
+    font-weight: bold;
+}
+.normal-mode {
+    background-color: #fff !important;
+}
+.dark-mode {
+    background-color: rgb(159 159 159) !important;
+}
+.header .adminBox {
+    position: relative;
+}
+.header .adminBox .panel {
+    position: absolute;
+    left: 175px;
+    top: 11px;
+    padding: 10px;
+    background: #f44336;
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
 }
 .header .logoutBox {
     position: relative; 
@@ -35,31 +91,35 @@ label {
 .logoutBox button {
     position: absolute;
     right: 15px;
-    top: -40px;
+    top: -47px;
     padding: 10px;
     background: #f44336;
     color: #fff;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: bold;
     border-radius: 6px;
     border: none;
     cursor: pointer;
+    font-size: 16px;
 }
 .header .switchBox {
     position: relative;
 }
-.switchBox button {
+.switchBox a {
     position: absolute;
-    left: 15px;
-    top: 4px;
+    left: 5px;
+    top: 9px;
     padding: 10px;
-    background: #f44336;
+    background: #767676;
     color: #fff;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 18px;
     border-radius: 6px;
     border: none;
-    cursor: pointer; 
+    cursor: pointer;
+}
+.pageTitle {
+    font-size: 26px;
+    padding: 5px;
 }
 /*========================================================================
   Register
@@ -77,6 +137,7 @@ label {
     border-radius: 10px;
     padding: 5px;
     margin: 5px;
+    font-size: 18px;
 }
 .RegisterForm button {
     margin-top: 10px;
@@ -85,8 +146,9 @@ label {
     color: #fff;
     background-color: #4cc120;
     padding: 10px;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: bold;
+    cursor: pointer;
 }
 .RegisterForm input::placeholder {
     color: #000;
@@ -96,18 +158,397 @@ label {
     font-style: italic;
     margin: 7px 0px 12px 0px;
     cursor: pointer;
+    text-align: center;
+}
+/*========================================================================
+  Reset password
+/*=======================================================================*/
+.ResetForm {
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+}
+.ResetForm input {
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+.ResetForm button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 9px;
+    color: #fff;
+    background-color: #4cc120;
+    padding: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.resetC {
+    width: 100%;
+    text-align: center;
+    margin: 10px;
 }
 /*========================================================================
   Index
 /*=======================================================================*/
+i {
+    top: 13px;
+    position: relative;
+    color: gray;
+    font-size: 24px;
+    left: 3px;
+    cursor: pointer;
+}
+.taskCreated {
+    width: max-content;
+    margin: 20px auto;
+}
+.taskCreated p {
+    text-align: center;
+    margin-top: 10px;
+    background: green;
+    width: max-content;
+    padding: 6px;
+    color: #fff;
+    border-radius: 6px;
+    float: left;
+}
 .createButton a {
     padding: 10px;
     background: #f44336;
     color: #fff;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: bold;
     border-radius: 6px;
     border: none;
     cursor: pointer;
     text-decoration: none;
+    margin: 10px;
+}
+.tasksTitle {
+    text-align: left;
+    margin: 36px 10px 20px 10px;
+    font-size: 26px;
+}
+.tasks {
+    max-width: 80%;
+}
+@media (max-width: 1100px) {
+    body .tasks .time {
+        font-size: 16px;
+    }
+    body .tasks p {
+        font-size: 16px;
+    }
+    body .task .bar {
+        margin-right: 10px;
+        width: 200px;
+    }
+    body .task .percentage {
+        right: 10%;
+    }
+}
+@media (max-width: 750px) {
+    .task .bar {
+        display: none;
+    }
+    .tasks {
+        max-width: 95%;
+    }
+    body .task .time {
+        width: 52%;
+    }
+    body .task .percentage {
+        right: 15px;
+    }
+}
+.tasks .task {
+    background: #efefef;
+    border: 2px solid #000;
+    border-radius: 6px;
+    margin: 10px;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+}
+.task p {
+    text-align: left;
+    width: 20%;
+    padding: 10px;
+    align-self: center;
+    font-size: 24px;
+    font-weight: bold;
+    padding-right: 0px;
+}
+.task .time {
+    width: 43%;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 10px 15px;
+    padding-left: 0px;
+}
+.task .bar {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 250px;
+    height: 30px;
+    margin: 0 auto;
+    align-self: center;
+    border-radius: 8px;
+    background: #fff;
+    position: relative;
+    border: 2px solid #000;
+}
+.task .percentage {
+    position: absolute;
+    width: min-content;
+    right: 14%;
+    color: #fff;
+    background: #00000073;
+    border-radius: 6px;
+    padding: 0px 3px;
+    font-size: 17px;
+}
+/* Different progress bar colors: */
+.bar-green::-webkit-progress-bar,
+.bar-green::-moz-progress-bar {
+    background: green;
+}
+.bar-orange::-webkit-progress-bar,
+.bar-orange::-moz-progress-bar {
+    background: #f74807;
+}
+.bar-red::-webkit-progress-bar,
+.bar-red::-moz-progress-bar {
+    background: #e31818;
+}
+.msg {
+    text-align: left;
+    margin: 10px;
+}
+.container {
+    display: flex;
+    position: relative;
+}
+.container .repeat {
+    font-weight: 900;
+    font-size: 26px;
+    background: #f74807;
+    padding: 4px 5px;
+    border-radius: 6px;
+    color: #fff;
+    align-self: center;
+    top: 0;
+    left: 0;
+}
+.taskExpired {
+    width: 100%;
+}
+.taskExpired .taskhref {
+    width: 100%;
+}
+.taskhref {
+    display: flex;
+    position: relative;
+}
+#overlay {
+    position: fixed;
+    display: none;
+    width: 50%;
+    max-width: 80%;
+    height: 12%;
+    top: 40%;
+    left: 25%;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 2;
+    border-radius: 6px;
+}
+#overlay a {
+    width: max-content;
+    display: block;
+    margin: 0 auto;
+}
+#overlay p,
+#overlay h2 {
+    color: #fff;
+    text-align: center;
+    margin: 10px auto;
+    word-wrap: break-word;
+    padding: 5px;
+}
+#overlay h2 {
+    text-decoration: underline;
+}
+#crosss {
+    color: #fff;
+    font-size: 28px;
+    padding: 5px 20px;
+    float: right;
+}
+/*========================================================================
+  Create Task
+/*=======================================================================*/
+.form {
+    width: 50%;
+    margin: 0 auto;
+}
+.createTask {
+    width: min-content;
+    text-align: center;
+    margin: 0 auto;
+}
+.createTask input {
+    margin: 5px 2px;
+    font-size: 22px;
+    border: 2px solid #666;
+    border-radius: 6px;
+    padding: 5px 2px;
+}
+.createTask input::placeholder {
+    color: #1C1C1C;
+    opacity: 1;
+}
+.createTask #rOptions {
+    color: #1C1C1C;
+    margin: 5px 2px;
+    font-size: 20px;
+    border: 2px solid #666;
+    padding: 10px 8px;
+    background: #fff;
+}
+.createTask .create {
+    padding: 10px;
+    background: #f44336;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+}
+.createTask .time {
+    width: 43%;
+}
+/*========================================================================
+  Update / Delte Task
+/*=======================================================================*/
+.deleteTask {
+    position: relative;
+    width: 32%;
+    margin: 0 auto;
+}
+.delete {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: -60px;
+}
+.delete i {
+    height: 20px;
+    top: 21px;
+}
+.delete i::before {
+    font-size: 26px;
+    top: 5px;
+    position: relative;
+    color: #db3327;
+}
+/*========================================================================
+  Premium
+/*=======================================================================*/
+.list {
+    max-width: 50%;
+    text-align: left;
+    margin: 10px auto;
+}
+.list li {
+    text-align: left;
+    margin: 10px;
+}
+/*========================================================================
+  Admin
+/*=======================================================================*/
+.gridcontainer {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 30px;
+}
+@media (max-width: 900px) {
+    .gridcontainer {
+        grid-template-columns: auto;
+    }
+    .gridcontainer .users {
+        width: 55%;
+    }
+}
+@media (max-width: 800px) {
+    .gridcontainer .users {
+        width: 95%;
+    }
+}
+#subTitle {
+    font-size: 22px;
+}
+.users {
+    width: 85%;
+    margin: 0 auto;
+}
+.user {
+    display: flex;
+    background: #efefef;
+    border: 2px solid #000;
+    border-radius: 6px;
+    margin: 10px;
+    padding: 10px;
+}
+.user form {
+    width: 30%;
+}
+.user p {
+    text-align: left;
+}
+.user .email {
+    width: 70%;
+    align-self: center;
+    font-size: 20px;
+}
+.user .type {
+    width: 30%;
+    text-align: center;
+}
+.user .select {
+    color: #1C1C1C;
+    font-size: 18px;
+    border: 2px solid #666;
+    padding: 1px 2px;
+    background: #fff;
+}
+/* tarief */
+#tariefForm {
+    text-align: center;
+    margin: 10px;
+}
+#tariefForm input {
+    width: 10%;
+    border: 2px solid #000;
+    border-radius: 3px;
+    font-size: 18px;
+    background: #efefef;
+}
+#tariefForm .save {
+    padding: 5px;
+    background: #f44336;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
 }

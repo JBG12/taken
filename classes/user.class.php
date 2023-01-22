@@ -1,16 +1,7 @@
 <?php
-include ("database.class.php");
+require_once('database.class.php');
 
 class user {
-    public static $host = "localhost";
-    public static $user = "root";
-    public static $pass = "";
-    public static $db = "to_do";
-
-    public static function connect() {
-        $db = mysqli_connect(self::$host, self::$user, self::$pass, self::$db);
-        return $db;
-    }
     // Hash password function
     public static function hashPassword($password) {
         $password_enq = password_hash($password, PASSWORD_DEFAULT);
@@ -18,20 +9,62 @@ class user {
     }
     // Check if account exists by the account id
     public static function ExistsAccountByUUID($id) {
-        $user = self::connect()->query("SELECT * FROM users WHERE uuid = '".$id."'")->fetch_assoc();
+        $user = database::connect()->query("SELECT * FROM users WHERE uuid = '".$id."'")->fetch_assoc();
         return $user;
     }
     // Get users password by its UUID
     public static function getPasswordByUUID($user_uuid) {
-        $password = self::connect()->query("SELECT * FROM users WHERE uuid = '".$user_uuid."'")->fetch_assoc();
+        $password = database::connect()->query("SELECT * FROM users WHERE uuid = '".$user_uuid."'")->fetch_assoc();
         return $password['password'];
     }
     // Update the password of a user
     public static function updateUserPassword($user_uuid, $hashed_password) {
-        $password = self::connect()->query("UPDATE users SET password = '$hashed_password' WHERE uuid = '".$user_uuid."'");
+        $password = database::connect()->query("UPDATE users SET password = '$hashed_password' WHERE uuid = '".$user_uuid."'");
         return $password;
+    }
+    // Check if user is premium
+    public static function user_premium($user_id) {
+        $user = database::connect()->query("SELECT type_id FROM users WHERE id = '".$user_id."'")->fetch_all();
+        $user_def = $user[0][0];
+        $type = database::connect()->query("SELECT name FROM types WHERE ID = '".$user_def."'")->fetch_all();
+
+        return $type[0][0];
+    }
+    // check user 
+    
+    // check tasks from user
+    public static function user_tasks($user_id) {
+        $tasks = database::connect()->query("SELECT * FROM tasks WHERE user_id = '$user_id'");
+        return mysqli_num_rows($tasks);
+    }
+    // Get all users
+    public static function get_users() {
+        $users = database::connect()->query("SELECT * FROM users");
+        return $users;
+    }
+    // Get every user account type (free, premium ect)
+    public static function get_types() {
+        $types = database::connect()->query("SELECT * FROM types")->fetch_all();
+        return $types;
+    }
+    // Update user, change type.
+    public static function update_user($post) {
+        $type = $post['rOptions'];
+        $id = $post['id'];
+
+        $update = database::connect()->query("UPDATE users SET type_id = '$type' WHERE ID = '".$id."'");
+        return $update;
+    }
+    // Get tarief
+    public static function get_tarief() {
+        $tarief = database::connect()->query("SELECT tarief FROM tarief")->fetch_all();
+        return $tarief[0][0];
+    }
+    // Update tarief
+    public static function update_tarief($tarief) {
+        $tarief = database::connect()->query("UPDATE tarief SET tarief = '$tarief' WHERE id = '1'");
+        return $tarief;
     }
 
 }
-
 ?>

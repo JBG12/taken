@@ -8,18 +8,24 @@ session_start();
     <link href="./CSS/css.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
-    <?php 
-
-    ?>
-
+    <script type="text/javascript" src="classes/javascript.class.js"></script>
 </head>
+<body onload="toggleDarkMode('onload')">
 <div class="header">
     <?php
-    // echo '<form method="POST" class="switchBox">';
-    // echo '<button class="switch" onclick="toggleDarkMode()" name="switch">SWICTH</button>';
-    // echo '</form>';
+    if (isset($_SESSION['active'])) {
+        if ($_SESSION['admin'] == true) {
+            echo '<div class="adminBox">';
+                echo '<a class="panel" href="./admin">Admin Paneel</a>';
+            echo '</div>';
+        }
+    }
+    // Dark / lightmode switch
+    echo '<div class="switchBox">';
+    echo '<a class="switch" onclick="toggleDarkMode()" name="switch">Thema wisselen</a>';
+    echo '</div>';
     ?>
-    <h1>To-Do</h1>
+    <a href="./index">To-Do</a>
     <?php
     if (isset($_SESSION['active'])) {
         echo '<form method="POST" class="logoutBox">';
@@ -29,9 +35,8 @@ session_start();
     if (isset($_POST["logout"])) {
         session_unset();
         session_destroy();
-        header('location: login.php');
+        header('location: login');
     }
     
     ?>
 </div>
-<script src="./JS/js.js"></script>

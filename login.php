@@ -4,6 +4,15 @@ include("classes/user.class.php");
 include("classes/UUID.class.php");
 ?>
 <body>
+    <?php
+    // Check if a task was created, then show confirmation3
+    if (!empty($_GET['create'])) {
+        echo '<div id="taskCreated" class="taskCreated">';
+            echo '<p>Je hebt succesvol een account aangemaakt.</p> <i onclick="deleteObject()" id="cross" class="fas fa-times-circle"></i>';
+        echo '</div>';
+        }
+    
+    ?>
     <div class="content">
         
     <?php
@@ -14,7 +23,8 @@ include("classes/UUID.class.php");
     echo '<form class="RegisterForm" method="POST">';
         echo '<input type="text" value="" name="email1" placeholder="E-mailadres"> </br>';
         echo '<input type="password" value="" name="password1" placeholder="Wachtwoord"> </br>';
-        echo '<a href="register.php" class="register">Heb je nog geen accout? Registreer je! </a> </br>';
+        echo '<a href="register" class="register">Heb je nog geen accout? Registreer je! </a> </br>';
+        echo '<a href="forgot_password" class="register">Wachtwoord vergeten? Reset hier je wachtwoord! </a> </br>';
         echo '<button type="submit" name="submitLogin">Inloggen</button>';
     echo '</form>';
     // Login code
@@ -31,8 +41,11 @@ include("classes/UUID.class.php");
                 // succesvol login.
                 session_start();
                 $_SESSION['active'] = 'true';
+                $_SESSION['admin'] = $result['admin'];
+                $_SESSION['type'] = $result['type_id'];
+                $_SESSION['user_id'] = $result['ID'];
                 // print_r($_SESSION);
-                header('location: index.php');
+                header('location: index');
             } else {
                 echo '<script>alert("E-mailadres of wachtwoord onjuist.");</script>';
             }

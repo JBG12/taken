@@ -13,7 +13,7 @@ include("classes/UUID.class.php");
     echo '<form class="RegisterForm" method="POST">';
         echo '<input type="text" value="" name="email" placeholder="E-mailadres"> </br>';
         echo '<input type="password" value="" name="password" placeholder="Wachtwoord"> </br>';
-        echo '<a href="login.php" class="register">Heb je al een account? Log dan in! </a> </br>';
+        echo '<a href="login" class="register">Heb je al een account? Log dan in! </a> </br>';
         echo '<button type="submit" name="submitRegister">Registreren</button>';
     echo '</form>';
     // Register code
@@ -27,6 +27,7 @@ include("classes/UUID.class.php");
 
             $sql = "INSERT INTO users (ID, uuid, email, password, type_id) VALUES ('', '$uuid', '$email', '$password_enq', '3');";
             $result = mysqli_query($db, $sql);
+            header("Location:login?create=true");
         } else {
             echo '<script>alert("Vul beide velden in met correcte gegevens.");</script>';
         }

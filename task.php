@@ -2,25 +2,78 @@
 include('header.php');
 include("classes/user.class.php");
 include("classes/UUID.class.php");
+include("classes/task.class.php");
 ?>
 <body>
     <div class="content">
-        
     <?php
     if (isset($_SESSION['active'])) {
       // Connect to the database
-      $db = database::connect();
+        $db = database::connect();
+        $task_id = $_GET['id'];
+        $user_id = $_SESSION['user_id'];
+        $task_exists = task::check_task($task_id);
+        // check if task exists
+        if (mysqli_num_rows($task_exists) > 0) {
+            $where = './index';
+            echo task::return_button($where);
 
-      echo '<h2 class="pageTitle"> Taak aanmaken </h2>';
-      echo '<div class="createButton">';
-      echo '<a href="task.php">Taak aanmaken</a>';
-      echo '</div>';
+            $title = task::get_task_title($task_id);
+            echo '<h2 id="pageTitle" class="pageTitle"> Taak: '.$title.'</h2>';
+
+            $task = task::get_specific_task($task_id);
+            echo '<div class="form">';
+            echo '<form class="createTask" method="POST">';
+                echo '<input type="text" value="'.$task['title'].'" name="title"> </br>';
+                echo '<input type="text" value="'.$task['description'].'" name="description"> </br>';
+                echo '<input type="text" onfocus="(this.type=`date`)" class="time" value="'.$task['start_time'].'" name="startTime">';
+                echo '<input type="text" onfocus="(this.type=`date`)" class="time" value="'.$task['end_time'].'" name="endTime"> </br>';
+
+                $is_premium = user::user_premium($user_id);
+                if ($is_premium == 'Premium') {
+                    echo '<label for="repeating">Herhaal de taak</label><br>';
+                    echo '<select name="rOptions" id="rOptions">';
+                        echo '<option value="null">Niet</option>';
+                        $values = task::get_repeating_values();
+                        foreach ($values as $value) {
+                            echo '<option value="'.$value[0].'">'.$value[1].'</option>';
+                        }
+                    echo '</select> </br>';
+                }
+                echo '<button type="submit" class="create" name="updateTask">Taak Bijwerken</button>';
+            echo '</form>';
+            echo '</div>';
+
+            if (isset($_POST['updateTask'])) {
+                if ($_POST['title'] && $_POST['description'] && $_POST['startTime'] && $_POST['endTime']) {
+                    $post = $_POST;
+                    $date_now = date('y-m-d h:i:s');
+                    $send = '';
+                    $user_id = $_SESSION['user_id']; 
+                    $start_date = new DateTime($_POST['startTime']);
+                    $end_date = new DateTime($_POST['endTime']);
+                    $start_date->format('Y-m-d');
+                    $end_date->format('Y-m-d');
+                    if (($end_date > $date_now) && ($end_date > $start_date)) {
+                      $send = task::update_task($post, $task_id);
+                    } else {
+                      echo '<p id="error" class="error">Correcte data invullen!</p>';
+                      echo '<script>setErrorMsg("error", "pageTitle");</script>';
+                    }
+                    if ($send) {
+                      header("Location:task?id=".$task_id);
+                    }
+                }
+
+            }
+            
+        } else {
+            header('location: index');
+        }
 
     } else {
-      header('location: login.php');
+      header('location: login');
     }
-
-
     ?>
     </div>
 </body>

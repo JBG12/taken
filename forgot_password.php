@@ -23,7 +23,7 @@ include("classes/mail.class.php");
             $to = $_POST["email"];
 
             // Check if email exists          
-            $query = "SELECT id FROM users WHERE email = '$to'";
+            $query = "SELECT * FROM users WHERE email = '$to'";
             $result = $db->query($query);
 
             if ($result->num_rows > 0) {
@@ -33,7 +33,7 @@ include("classes/mail.class.php");
             } else {
                 echo "Vul een geldig e-mailadres in.";
             }
-            $link = 'http://localhost/taken/reset_pass.php?id='. $user_uuid;
+            $link = 'http://localhost/taken/reset_pass?id='. $user_uuid;
             // Mail data
             $subject = 'Wachtwoord Reset';
             $body = 

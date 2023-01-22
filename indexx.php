@@ -6,9 +6,9 @@
     <p class="time" id="time">00:00:00:000</p>
     <div id="show">
     <?php
-      // $db = mysqli_connect("localhost", "root", "", "rapporteersysteem");
-      // $name = $db->query("SELECT location FROM locations WHERE location_id = '7a234569-7e50-4fd3-b66c-01867da962e6'")->fetch_assoc();
-      // echo $name['location'];
+      $db = mysqli_connect("localhost", "root", "", "rapporteersysteem");
+      $name = $db->query("SELECT location FROM locations WHERE location_id = '7a234569-7e50-4fd3-b66c-01867da962e6'")->fetch_assoc();
+      echo $name['location'];
       ?>
     </div>
     <input type="text">
