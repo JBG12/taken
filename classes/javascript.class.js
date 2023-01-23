@@ -169,34 +169,24 @@ function toggleDarkMode(onload) {
     // onload to check the current theme
     if (onload) {
         var currentValue = localStorage.getItem('mode');
-        document.body.className = '';
-        document.getElementsByClassName("task").className = '';
-        document.body.classList.add(currentValue + '-mode');
-        let elements = document.getElementsByClassName("task");
-        for (let elem of elements) {
-            elem.classList.add(currentValue + '-mode');
+        if (currentValue == 'dark') {
+            document.getElementsByTagName('link')[0].disabled = true;
+            document.getElementsByTagName('link')[1].disabled = false;
+        } else {
+            document.getElementsByTagName('link')[1].disabled = true;
+            document.getElementsByTagName('link')[0].disabled = false;
         }
     } else {
         // if button press, change theme
         var currentValue = localStorage.getItem('mode');
         if (currentValue === 'dark') {
+            document.getElementsByTagName('link')[1].disabled = true;
+            document.getElementsByTagName('link')[0].disabled = false;
             localStorage.setItem('mode', 'normal');
-            document.body.classList.remove('dark-mode');
-            document.body.classList.add('normal-mode');
-            let elements = document.getElementsByClassName("task");
-            for (let elem of elements) {
-            elem.classList.add('normal-mode');
-            elem.classList.remove('dark-mode');
-            }
         } else {
+            document.getElementsByTagName('link')[0].disabled = true;
+            document.getElementsByTagName('link')[1].disabled = false;
             localStorage.setItem('mode', 'dark');
-            document.body.classList.remove('normal-mode');
-            document.body.classList.add('dark-mode');
-            let elements = document.getElementsByClassName("task");
-            for (let elem of elements) {
-            elem.classList.add('dark-mode');
-            elem.classList.remove('normal-mode');
-            }
         }
     }
 }
