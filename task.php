@@ -1,6 +1,7 @@
 <?php
 include('header.php');
 include("classes/user.class.php");
+// include("classes/database.class.php");
 include("classes/UUID.class.php");
 include("classes/task.class.php");
 ?>
@@ -41,27 +42,42 @@ include("classes/task.class.php");
                     echo '</select> </br>';
                 }
                 echo '<button type="submit" class="create" name="updateTask">Taak Bijwerken</button>';
+                // echo '<button type="submit" class="delete" name="deleteTask">Taak Verwijderen</button>';
             echo '</form>';
             echo '</div>';
 
             if (isset($_POST['updateTask'])) {
                 if ($_POST['title'] && $_POST['description'] && $_POST['startTime'] && $_POST['endTime']) {
+                    $_POST['description'] = database::validate($_POST['description']);
+                    $_POST['startTime'] = database::validate($_POST['startTime']);
+                    $_POST['endTime'] = database::validate($_POST['endTime']);
+                    $_POST['title'] = database::validate($_POST['title']);
                     $post = $_POST;
                     $date_now = date('y-m-d h:i:s');
                     $send = '';
                     $user_id = $_SESSION['user_id']; 
-                    $start_date = new DateTime($_POST['startTime']);
-                    $end_date = new DateTime($_POST['endTime']);
-                    $start_date->format('Y-m-d');
-                    $end_date->format('Y-m-d');
-                    if (($end_date > $date_now) && ($end_date > $start_date)) {
-                      $send = task::update_task($post, $task_id);
+
+                    $start_time = task::validateDate($_POST['startTime']);
+                    $end_time = task::validateDate($_POST['endTime']);
+                    if (($start_time == true) && ($end_time == true)) {
+
+                      $start_date = new DateTime($_POST['startTime']);
+                      $end_date = new DateTime($_POST['endTime']);
+                      $start_date->format('Y-m-d');
+                      $end_date->format('Y-m-d');
+                      
+                      if (($end_date > $date_now) && ($end_date > $start_date)) {
+                        $send = task::update_task($post, $task_id);
+                      } else {
+                        echo '<p id="error" class="error">Correcte data invullen!</p>';
+                        echo '<script>setErrorMsg("error", "pageTitle");</script>';
+                      }
+                      if ($send) {
+                        header("Location:task?id=".$task_id);
+                      }
                     } else {
                       echo '<p id="error" class="error">Correcte data invullen!</p>';
                       echo '<script>setErrorMsg("error", "pageTitle");</script>';
-                    }
-                    if ($send) {
-                      header("Location:task?id=".$task_id);
                     }
                 }
 

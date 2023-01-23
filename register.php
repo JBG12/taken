@@ -2,6 +2,7 @@
 include('header.php');
 include("classes/user.class.php");
 include("classes/UUID.class.php");
+// include("classes/database.class.php");
 ?>
 <body>
     <div class="content">
@@ -20,6 +21,8 @@ include("classes/UUID.class.php");
     if (isset($_POST["submitRegister"])) {
         $uuid = UUID::generateUUID();
         if (!empty($_POST["email"]) || !empty($_POST["password"])) {
+            $_POST['email'] = database::validate($_POST['email']);
+            $_POST['password'] = database::validate($_POST['password']);
             $email = $_POST["email"];
             $password = $_POST["password"];
             // hash (encrypt) password in database for security

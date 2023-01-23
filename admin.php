@@ -39,16 +39,59 @@ include("classes/task.class.php");
                                     }
                                 }
                             echo '</select>';
+                            echo '</form>';
+                            // User role
+                            echo '<form onchange="onChanges(`'.$value['ID'].'A`)" id="'.$value['ID'].'A" method="POST">';
+                            echo '<input type="hidden" name="idOne" value="'.$value['ID'].'">';
+                            echo '<select class="select" id="'.$value['ID'].'A" name="uOptions">';
+                                $display_type = user::user_role($value['ID']);
+                                if ($display_type == true) {
+                                    $display = 'Admin';
+                                    $type = 'false';
+                                    $display_else = 'Gebruiker';
+                                } else {
+                                    $display = 'Gebruiker';
+                                    $type = '1';
+                                    $display_else = 'Admin';
+                                }
+                                echo '<option value="'.$display_type.'">'.$display.'</option>';
+                                echo '<option value="'.$type.'">'.$display_else.'</option>';
+                            echo '</select>';
+                        echo '</form>';
+                        echo '<form id="'.$value['ID'].'-del" method="POST">';
+                            echo '<button type="submit" value="'.$value['ID'].'" name="deleteUser" class="del"><i class="far fa-trash-alt"></i></button>';
                         echo '</form>';
                     echo '</div>';
                 }
                 echo '</div>';
             echo '</div>';
-            if ((!empty($_POST['rOptions'])) && (!empty($_POST['id']))) {
-                // update user
+            if (!isset($_POST['deleteUser'])) {
+                if ((!empty($_POST['rOptions'])) && (!empty($_POST['id']))) {
+                    $_POST['rOptions'] = database::validate($_POST['rOptions']);
+                    $_POST['id'] = database::validate($_POST['id']);
+                    // update user
+                    $post = $_POST;
+                    $send = user::update_user($post);
+                    if($send) {
+                        header("Location:admin");
+                    }
+                }
+                if ((!empty($_POST['uOptions'])) && (!empty($_POST['idOne']))) {
+                    $_POST['uOptions'] = database::validate($_POST['uOptions']);
+                    $_POST['idOne'] = database::validate($_POST['idOne']);
+                    // update user
+                    $post = $_POST;
+                    $send = user::update_role($post);
+                    if($send) {
+                        header("Location:admin");
+                    }
+                }
+            }
+            if (isset($_POST['deleteUser'])) {
+                $_POST['deleteUser'] = database::validate($_POST['deleteUser']);
                 $post = $_POST;
-                $send = user::update_user($post);
-                if($send) {
+                $send = user::delete_user($post);
+                if ($send) {
                     header("Location:admin");
                 }
             }

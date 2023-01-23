@@ -29,6 +29,9 @@ include("classes/UUID.class.php");
     echo '</form>';
     // Login code
     if (isset($_POST["submitLogin"])) {
+        $_POST['email1'] = database::validate($_POST['email1']);
+        $_POST['password1'] = database::validate($_POST['password1']);
+
         $email = $_POST["email1"];
         $password = $_POST["password1"];
         $sql = "SELECT * FROM users WHERE email = '$email'";

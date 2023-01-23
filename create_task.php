@@ -1,6 +1,7 @@
 <?php
 include('header.php');
 include("classes/user.class.php");
+// include("classes/database.class.php");
 include("classes/task.class.php");
 ?>
 <body>
@@ -38,7 +39,10 @@ include("classes/task.class.php");
         echo '</form>';
         if (isset($_POST['createTask'])) {
           if ($_POST['title'] && $_POST['description'] && $_POST['startTime'] && $_POST['endTime']) {
-
+            $_POST['description'] = database::validate($_POST['description']);
+            $_POST['startTime'] = database::validate($_POST['startTime']);
+            $_POST['endTime'] = database::validate($_POST['endTime']);
+            $_POST['title'] = database::validate($_POST['title']);
             $user_id = $_SESSION['user_id']; 
             $post = $_POST;
             $date_now = date('Y-m-d');

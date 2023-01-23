@@ -174,7 +174,7 @@ function toggleDarkMode(onload) {
         document.body.classList.add(currentValue + '-mode');
         let elements = document.getElementsByClassName("task");
         for (let elem of elements) {
-        elem.classList.add(currentValue + '-mode');
+            elem.classList.add(currentValue + '-mode');
         }
     } else {
         // if button press, change theme

@@ -30,7 +30,13 @@ class user {
 
         return $type[0][0];
     }
-    // check user 
+    // check user role
+    public static function user_role($user_id) {
+        $user = database::connect()->query("SELECT admin FROM users WHERE id = '".$user_id."'")->fetch_all();
+        $user_def = $user[0][0];
+
+        return $user_def;
+    }
     
     // check tasks from user
     public static function user_tasks($user_id) {
@@ -55,6 +61,13 @@ class user {
         $update = database::connect()->query("UPDATE users SET type_id = '$type' WHERE ID = '".$id."'");
         return $update;
     }
+    public static function update_role($post) {
+        $type = $post['uOptions'];
+        $id = $post['idOne'];
+
+        $update = database::connect()->query("UPDATE users SET admin = '$type' WHERE ID = '".$id."'");
+        return $update;
+    }
     // Get tarief
     public static function get_tarief() {
         $tarief = database::connect()->query("SELECT tarief FROM tarief")->fetch_all();
@@ -64,6 +77,12 @@ class user {
     public static function update_tarief($tarief) {
         $tarief = database::connect()->query("UPDATE tarief SET tarief = '$tarief' WHERE id = '1'");
         return $tarief;
+    }
+    // Delete a user
+    public static function delete_user($post) {
+        $id = $post['deleteUser'];
+        $del = database::connect()->query("DELETE FROM users WHERE ID = '$id'");
+        return $del;
     }
 
 }

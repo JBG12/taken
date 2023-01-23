@@ -74,7 +74,7 @@ class task {
         return $task;
     }
     // Validate time
-    function validateDate($date) {
+    public static function validateDate($date) {
         $format = 'Y-m-d';
         $dateform = DateTime::createFromFormat($format, $date);
         return $dateform && $dateform->format($format) === $date;

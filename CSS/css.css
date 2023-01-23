@@ -476,7 +476,7 @@ i {
 /*=======================================================================*/
 .gridcontainer {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 2fr 1fr;
     margin-top: 30px;
 }
 @media (max-width: 900px) {
@@ -496,8 +496,8 @@ i {
     font-size: 22px;
 }
 .users {
-    width: 85%;
-    margin: 0 auto;
+    width: 100%;
+    margin: 10px auto;
 }
 .user {
     display: flex;
@@ -506,9 +506,11 @@ i {
     border-radius: 6px;
     margin: 10px;
     padding: 10px;
+    width: 95%;
 }
 .user form {
     width: 30%;
+    align-self: center;
 }
 .user p {
     text-align: left;
@@ -529,13 +531,24 @@ i {
     padding: 1px 2px;
     background: #fff;
 }
+/* Delete use */
+.del {
+    background: none;
+    border: none;
+}
+.far.fa-trash-alt {
+    color: #e61000;
+    top: 0px;
+    left: 32px;
+    font-size: 32px;
+}
 /* tarief */
 #tariefForm {
     text-align: center;
     margin: 10px;
 }
 #tariefForm input {
-    width: 10%;
+    width: 55px;
     border: 2px solid #000;
     border-radius: 3px;
     font-size: 18px;
@@ -551,4 +564,7 @@ i {
     border: none;
     cursor: pointer;
     margin-top: 8px;
+}
+.tarief {
+    margin: 0px 10px;
 }
