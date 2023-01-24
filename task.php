@@ -41,8 +41,8 @@ include("classes/task.class.php");
                         }
                     echo '</select> </br>';
                 }
-                echo '<button type="submit" class="create" name="updateTask">Taak Bijwerken</button>';
-                // echo '<button type="submit" class="delete" name="deleteTask">Taak Verwijderen</button>';
+                echo '<button type="submit" class="create" name="updateTask">Taak Bijwerken</button><br>';
+                echo '<button type="submit" class="create del" name="deleteTask">Taak Verwijderen</button>';
             echo '</form>';
             echo '</div>';
 
@@ -81,6 +81,16 @@ include("classes/task.class.php");
                     }
                 }
 
+            }
+            if (isset($_POST['deleteTask'])) {
+              $send = task::delete_task($task_id);
+
+              if ($send) {
+                header("Location:index");
+              } else {
+                echo '<p id="error" class="error">Error</p>';
+                echo '<script>setErrorMsg("error", "pageTitle");</script>';
+              }
             }
             
         } else {

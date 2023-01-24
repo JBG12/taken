@@ -28,7 +28,7 @@ include("classes/task.class.php");
           if ($is_premium == 'Premium') {
           echo '<label for="repeating">Herhaal de taak</label><br>';
           echo '<select name="rOptions" id="rOptions">';
-            echo '<option value="null">Niet</option>';
+            echo '<option value="">Niet</option>';
             $values = task::get_repeating_values();
             foreach ($values as $value) {
               echo '<option value="'.$value[0].'">'.$value[1].'</option>';
@@ -43,6 +43,8 @@ include("classes/task.class.php");
             $_POST['startTime'] = database::validate($_POST['startTime']);
             $_POST['endTime'] = database::validate($_POST['endTime']);
             $_POST['title'] = database::validate($_POST['title']);
+            $_POST['rOptions'] = database::validate($_POST['rOptions']);
+            
             $user_id = $_SESSION['user_id']; 
             $post = $_POST;
             $date_now = date('Y-m-d');

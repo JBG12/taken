@@ -22,6 +22,17 @@ class user {
         $password = database::connect()->query("UPDATE users SET password = '$hashed_password' WHERE uuid = '".$user_uuid."'");
         return $password;
     }
+    // Create (insert) user
+    public static function create_user($post) {
+        $uuid = UUID::generateUUID();
+        $email = $post['email'];
+        $password = $post['password'];
+        // hash (encrypt) password in database for security
+        $password_enq = password_hash($password, PASSWORD_DEFAULT);
+
+        $user = database::connect()->query("INSERT INTO users (ID, uuid, email, password, type_id) VALUES ('', '$uuid', '$email', '$password_enq', '3')");
+        return $user;
+    }
     // Check if user is premium
     public static function user_premium($user_id) {
         $user = database::connect()->query("SELECT type_id FROM users WHERE id = '".$user_id."'")->fetch_all();

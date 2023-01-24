@@ -420,6 +420,7 @@ i {
     border: 2px solid #666;
     border-radius: 6px;
     padding: 5px 2px;
+    color: #1C1C1C;
 }
 .createTask input::placeholder {
     color: #1C1C1C;
@@ -563,13 +564,14 @@ i {
 #tariefForm {
     text-align: center;
     margin: 10px;
+    color: #efefef;
 }
 #tariefForm input {
     width: 55px;
     border: 2px solid #000;
     border-radius: 3px;
     font-size: 18px;
-    background: #efefef;
+    background: #373737 !important;
 }
 #tariefForm .save {
     padding: 5px;

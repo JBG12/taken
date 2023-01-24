@@ -10,27 +10,30 @@ include("classes/UUID.class.php");
     <?php
     $db = database::connect();
 
-    echo '<h2 class="pageTitle"> Registreren </h2>';
+    echo '<h2 id="pageTitle" class="pageTitle"> Registreren </h2>';
     echo '<form class="RegisterForm" method="POST">';
-        echo '<input type="text" value="" name="email" placeholder="E-mailadres"> </br>';
+        echo '<input type="email" value="" name="email" placeholder="E-mailadres"> </br>';
         echo '<input type="password" value="" name="password" placeholder="Wachtwoord"> </br>';
         echo '<a href="login" class="register">Heb je al een account? Log dan in! </a> </br>';
         echo '<button type="submit" name="submitRegister">Registreren</button>';
     echo '</form>';
     // Register code
     if (isset($_POST["submitRegister"])) {
-        $uuid = UUID::generateUUID();
         if (!empty($_POST["email"]) || !empty($_POST["password"])) {
             $_POST['email'] = database::validate($_POST['email']);
             $_POST['password'] = database::validate($_POST['password']);
-            $email = $_POST["email"];
-            $password = $_POST["password"];
-            // hash (encrypt) password in database for security
-            $password_enq = password_hash($password, PASSWORD_DEFAULT);
+            $post = $_POST;
+            $send = '';
+            if (((strlen($_POST["email"])) <= 30) && ((strlen($_POST["password"])) <= 30)) {
+                $send = user::create_user($post);
+            } else {
+                echo '<p id="error" class="error">E-mail of wachtwoord te lang, maximaal aantal karakters is 30.</p>';
+                echo '<script>setErrorMsg("error", "pageTitle");</script>';
+            }
 
-            $sql = "INSERT INTO users (ID, uuid, email, password, type_id) VALUES ('', '$uuid', '$email', '$password_enq', '3');";
-            $result = mysqli_query($db, $sql);
-            header("Location:login?create=true");
+            if ($send) {
+                header("Location:login?create=true");
+            }
         } else {
             echo '<script>alert("Vul beide velden in met correcte gegevens.");</script>';
         }

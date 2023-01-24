@@ -14,12 +14,13 @@ class task {
         $desc = mysqli_real_escape_string(database::connect(), $post['description']);
         $start = mysqli_real_escape_string(database::connect(), $post['startTime']);
         $end = mysqli_real_escape_string(database::connect(), $post['endTime']);
+        $uuid = UUID::generateUUID();
         if (!empty($post['rOptions'])) {
             $repeat = mysqli_real_escape_string(database::connect(), $post['rOptions']);
+
         } else {
-            $repeat = 'null';
+            $repeat = null;
         }
-        $uuid = UUID::generateUUID();
 
         $insert = database::connect()->query("INSERT INTO tasks (`ID`, `uuid`, `user_id`, `title`, `description`, `start_time`, `end_time`, `repeat_id`, `notification_delay`) 
         VALUES (NULL, '$uuid', '$user_id', '$title', '$desc', '$start', '$end', '$repeat', '0')");
@@ -34,6 +35,11 @@ class task {
 
         $update = database::connect()->query("UPDATE tasks SET title = '$title', description = '$desc', start_time = '$start', end_time = '$end' WHERE uuid = '".$task_id."'");
         return $update;
+    }
+    // Delete a specific task
+    public static function delete_task($task_id) {
+        $delete = database::connect()->query("DELETE FROM tasks WHERE uuid = '".$task_id."'");
+        return $delete;
     }
     // Get every task that can be done (open tasks)
     public static function get_open_tasks($user_id) {
