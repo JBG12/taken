@@ -21,6 +21,12 @@ include("classes/task.class.php");
           echo '<p>Je hebt succesvol een taak aangemaakt.</p> <i onclick="deleteObject()" id="cross" class="fas fa-times-circle"></i>';
         echo '</div>';
       }
+      // Check if a task was muted
+      if (!empty($_GET['mute'])) {
+        echo '<div id="taskCreated" class="taskCreated">';
+          echo '<p>Je hebt succesvol een taak gemute.</p> <i onclick="deleteObject()" id="cross" class="fas fa-times-circle"></i>';
+        echo '</div>';
+      }
       $user_id = $_SESSION['user_id'];
       $is_premium = user::user_premium($user_id);
       echo '<h2 class="tasksTitle"> Uw openstaande taken </h2>';

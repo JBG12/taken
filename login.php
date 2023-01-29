@@ -19,7 +19,7 @@ include("classes/UUID.class.php");
     // Connect to the database
     $db = database::connect();
 
-    echo '<h2 class="pageTitle"> Inloggen </h2>';
+    echo '<h2 id="pageTitle" class="pageTitle"> Inloggen </h2>';
     echo '<form class="RegisterForm" method="POST">';
         echo '<input type="text" value="" name="email1" placeholder="E-mailadres"> </br>';
         echo '<input type="password" value="" name="password1" placeholder="Wachtwoord"> </br>';
@@ -50,10 +50,12 @@ include("classes/UUID.class.php");
                 // print_r($_SESSION);
                 header('location: index');
             } else {
-                echo '<script>alert("E-mailadres of wachtwoord onjuist.");</script>';
+                echo '<p id="error" class="error">E-mailadres of wachtwoord is onjuist.</p>';
+                echo '<script>setErrorMsg("error", "pageTitle");</script>';
             }
         } else {
-            echo 'E-mailadres of wachtwoord is onjuist.';
+            echo '<p id="error" class="error">E-mailadres of wachtwoord is onjuist.</p>';
+            echo '<script>setErrorMsg("error", "pageTitle");</script>';
         }
 
     }

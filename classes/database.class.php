@@ -5,7 +5,7 @@ class database {
     public static $user = "root";
     public static $pass = "";
     public static $db = "to_do";
-    
+
     public static function connect()
     {
         $db = mysqli_connect(self::$host, self::$user, self::$pass, self::$db);

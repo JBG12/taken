@@ -17,6 +17,11 @@ class user {
         $password = database::connect()->query("SELECT * FROM users WHERE uuid = '".$user_uuid."'")->fetch_assoc();
         return $password['password'];
     }
+    // Get users password by its UUID
+    public static function get_email_by_id($id) {
+        $password = database::connect()->query("SELECT * FROM users WHERE id = '".$id."'")->fetch_assoc();
+        return $password['email'];
+    }
     // Update the password of a user
     public static function updateUserPassword($user_uuid, $hashed_password) {
         $password = database::connect()->query("UPDATE users SET password = '$hashed_password' WHERE uuid = '".$user_uuid."'");
@@ -71,6 +76,11 @@ class user {
 
         $update = database::connect()->query("UPDATE users SET type_id = '$type' WHERE ID = '".$id."'");
         return $update;
+    }
+    // Check if user is using a already used e-mailaddress
+    public static function check_email($email) {
+        $email = database::connect()->query("SELECT * FROM users WHERE email = '".$email."'")->fetch_all();
+        return $email;
     }
     public static function update_role($post) {
         $type = $post['uOptions'];

@@ -62,6 +62,7 @@ function countdownTimerToBe(id, start_time) {
     var distance = start - now;
 
     var timer = setInterval(function() {
+        var now = new Date().getTime();
         distance = start - new Date().getTime();
 
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -98,8 +99,11 @@ function countdownTimerToBe(id, start_time) {
             minutes = '';
             minutesIndicator = '';
         }
-
-        document.getElementById('timer-' + id).innerHTML = 'Kan gedaan worden over:<br> ' + days + daysIndicator + hours + hoursIndicator + minutes + minutesIndicator + seconds + secondsIndicator;
+        if (start > now) {
+            document.getElementById('timer-' + id).innerHTML = 'Kan gedaan worden over:<br> ' + days + daysIndicator + hours + hoursIndicator + minutes + minutesIndicator + seconds + secondsIndicator; 
+        } else {
+            document.getElementById('timer-' + id).innerHTML = 'Taak kan gedaan worden'; 
+        }
     }, 1000);
     // If task has started
     if (distance < 0) {
@@ -124,15 +128,18 @@ function progressBar(start_time, end_time, id) {
         document.getElementById('bar-' + id).value = (Math.round(progress * 100));
         numberr = (Math.floor(progress * 10000) / 100);
         document.getElementById('percentage-' + id).innerHTML = numberr.toFixed(1) + "%";
-        // round(4.96754,1,PHP_ROUND_HALF_DOWN)
         // Style progress bar according to progress:
         number = (Math.round(progress * 100));
         if (number < 50) {
             document.getElementById('bar-' + id).classList.add("bar-green");
         } else if (number < 90) {
             document.getElementById('bar-' + id).classList.add("bar-orange");
-        } else {
+        } else if (number <= 100) {
             document.getElementById('bar-' + id).classList.add("bar-red");
+        }
+        if (number >= 100) {
+            document.getElementById('bar-' + id).classList.add("bar-red");
+            document.getElementById('percentage-' + id).innerHTML = "100%";
         }
     }, 1000);
 }

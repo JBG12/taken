@@ -68,22 +68,22 @@ include("classes/task.class.php");
             if (!isset($_POST['deleteUser'])) {
                 if ((!empty($_POST['rOptions'])) && (!empty($_POST['id']))) {
                     $_POST['rOptions'] = database::validate($_POST['rOptions']);
-                    $_POST['id'] = database::validate($_POST['id']);
+                    $_POST['id']       = database::validate($_POST['id']);
                     // update user
                     $post = $_POST;
                     $send = user::update_user($post);
                     if($send) {
-                        header("Location:admin");
+                        echo "<meta http-equiv='refresh' content='0'>";
                     }
                 }
                 if ((!empty($_POST['uOptions'])) && (!empty($_POST['idOne']))) {
-                    $_POST['uOptions'] = database::validate($_POST['uOptions']);
-                    $_POST['idOne'] = database::validate($_POST['idOne']);
+                    $_POST['uOptions']  = database::validate($_POST['uOptions']);
+                    $_POST['idOne']     = database::validate($_POST['idOne']);
                     // update user
                     $post = $_POST;
                     $send = user::update_role($post);
                     if($send) {
-                        header("Location:admin");
+                        echo "<meta http-equiv='refresh' content='0'>";
                     }
                 }
             }
@@ -92,7 +92,7 @@ include("classes/task.class.php");
                 $post = $_POST;
                 $send = user::delete_user($post);
                 if ($send) {
-                    header("Location:admin");
+                    echo "<meta http-equiv='refresh' content='0'>";
                 }
             }
 

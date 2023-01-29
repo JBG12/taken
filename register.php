@@ -25,6 +25,9 @@ include("classes/UUID.class.php");
             $post = $_POST;
             $send = '';
             if (((strlen($_POST["email"])) <= 30) && ((strlen($_POST["password"])) <= 30)) {
+                // check email
+                // $email_check = user::check_email($_POST["email"]);
+                // var_dump($mysqli_num_rows ( $email_check ));
                 $send = user::create_user($post);
             } else {
                 echo '<p id="error" class="error">E-mail of wachtwoord te lang, maximaal aantal karakters is 30.</p>';
@@ -35,7 +38,8 @@ include("classes/UUID.class.php");
                 header("Location:login?create=true");
             }
         } else {
-            echo '<script>alert("Vul beide velden in met correcte gegevens.");</script>';
+            echo '<p id="error" class="error">Vul beide velden in met correcte gegevens.</p>';
+            echo '<script>setErrorMsg("error", "pageTitle");</script>';
         }
 
     }

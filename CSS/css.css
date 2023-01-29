@@ -34,17 +34,24 @@ label {
     border-radius: 6px;
     max-width: 30%;
 }
+#error a {
+    text-decoration: underline;
+}
 .backButton {
     width: min-content;
     position: absolute;
+    z-index: 100;
 }
 .fas.fa-arrow-left {
     background: #666;
     color: #fff;
     padding: 7px 10px;
+    margin-left: 10px;
     font-size: 28px;
     border-radius: 6px;
     cursor: pointer;
+    left: 0;
+    top: 0;
 }
 /*========================================================================
   Header
@@ -62,19 +69,14 @@ label {
     text-decoration: navajowhite;
     font-weight: bold;
 }
-.normal-mode {
-    background-color: #fff !important;
-}
-.dark-mode {
-    background-color: rgb(159 159 159) !important;
-}
+
 .header .adminBox {
     position: relative;
 }
 .header .adminBox .panel {
     position: absolute;
     left: 175px;
-    top: 11px;
+    top: -48px;
     padding: 10px;
     background: #f44336;
     color: #fff;
@@ -108,7 +110,7 @@ label {
 .switchBox a {
     position: absolute;
     left: 5px;
-    top: 9px;
+    top: -50px;
     padding: 10px;
     background: #767676;
     color: #fff;
@@ -120,6 +122,40 @@ label {
 .pageTitle {
     font-size: 26px;
     padding: 5px;
+}
+@media (max-width: 800px) {
+    .header {
+       display: block;
+    }
+    body .header .mainTitle {
+        display: block;
+        width: 100%;
+        margin: 10px 0px;
+    }
+    body .header .logoutBox {
+        margin: 10px 0px 5px 0px;
+    }
+    body .logoutBox button {
+        position: relative;
+        right: 0;
+        top: 0;
+    }
+    body .header .adminBox {
+        margin: 10px 0px 30px 0px;
+    }
+    body .header .adminBox .panel {
+        position: relative;
+        left: 0;
+        top: 0;
+    }
+    body .header .switchBox {
+        margin: 10px 0px 20px 0px;
+    }
+    body .switchBox .switch {
+        position: relative;
+        left: 0;
+        top: 0;
+    }
 }
 /*========================================================================
   Register
@@ -266,7 +302,7 @@ i {
 }
 .tasks .task {
     background: #efefef;
-    border: 2px solid #000;
+    border: 3px solid #000;
     border-radius: 6px;
     margin: 10px;
     display: flex;
@@ -299,7 +335,7 @@ i {
     border-radius: 8px;
     background: #fff;
     position: relative;
-    border: 2px solid #000;
+    border: 3px solid #000;
 }
 .task .percentage {
     position: absolute;
@@ -393,7 +429,6 @@ i {
   Create Task
 /*=======================================================================*/
 .form {
-    width: 50%;
     margin: 0 auto;
 }
 .createTask {
@@ -432,7 +467,7 @@ i {
     margin-top: 8px;
 }
 .createTask .time {
-    width: 43%;
+    width: 95%;
 }
 /*========================================================================
   Update / Delte Task
@@ -489,11 +524,36 @@ i {
 }
 @media (max-width: 800px) {
     .gridcontainer .users {
-        width: 95%;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .accounts {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .users .user {
+        display: block;
+        width: 100%;
+        margin: 10px auto;
+    }
+    .users .user p,
+    .users .user form {
+        width: 100%;
+        margin: 5px auto;
+        text-align: center;
+    }
+    .users .user i {
+        left: 0px;
     }
 }
 #subTitle {
     font-size: 22px;
+}
+.labels {
+    display: grid;
+    grid-template-columns: 2.1fr 0.7fr 1fr 1fr;
+    margin: 20px 0px 10px 0px;
+    font-size: 18px;
 }
 .users {
     width: 100%;
@@ -502,7 +562,7 @@ i {
 .user {
     display: flex;
     background: #efefef;
-    border: 2px solid #000;
+    border: 3px solid #000;
     border-radius: 6px;
     margin: 10px;
     padding: 10px;
@@ -527,7 +587,7 @@ i {
 .user .select {
     color: #1C1C1C;
     font-size: 18px;
-    border: 2px solid #666;
+    border: 3px solid #666;
     padding: 1px 2px;
     background: #fff;
 }

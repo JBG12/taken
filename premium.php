@@ -13,7 +13,7 @@ include("classes/task.class.php");
 
         $where = './index';
         echo task::return_button($where);
-        echo '<h2 class="pageTitle"> Inloggen </h2>';
+        echo '<h2 class="pageTitle"> Premium </h2><br>';
         echo '<p> Koop ons premium pakket en krijg toegang tot de volgende functionaliteiten:</p>';
         echo '<ul class="list">';
             echo '<li>Een oneindig aantal taken</li>';
