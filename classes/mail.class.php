@@ -8,20 +8,20 @@ class mail {
         $mail = new PHPMailer\PHPMailer\PHPMailer();
         // Add SMPT data
         $mail->isSMTP();
-        $mail->Host         = 'mail.antagonist.nl';
+        $mail->Host         = '';
         $mail->SMTPAuth     = true;
-        $mail->Username     = 'jelte@lesonline.nu';
-        $mail->Password     = '8rfP8qjqIC';
+        $mail->Username     = '';
+        $mail->Password     = '';
         $mail->SMTPSecure   = 'tls';
         $mail->Port         = 587;
         // Add sender and reciever
-        $mail->setFrom('jelte@lesonline.nu');
+        $mail->setFrom('');
         $mail->addAddress($to);
         
         // Allow HTML in the email
         $mail->isHTML(true);
         $mail->ContentType = 'text/html';
-        // Add mail subject and body values. 234269@edu.rocfriesepoort.nl
+        // Add mail subject and body values.
         $mail->Subject      = $subject;
         $mail->Body         = '<html><body>';
         $mail->Body         .= $body;
